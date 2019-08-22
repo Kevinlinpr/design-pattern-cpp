@@ -100,4 +100,8 @@ int main(){
     cook.createPizza(&spicyPizzaBuilder);
     cook.openPizza();
 }
+
+//console output
+//The Pizza have Hawaiian dough dough, Hawaiian sauce sauce, Hawaiian topping topping.
+//The Pizza have Spicy dough dough, Spicy sauce sauce, Spicy topping topping.
 ```
