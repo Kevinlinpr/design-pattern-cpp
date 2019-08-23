@@ -362,3 +362,225 @@ Hood: Toyota
 Wind Shield: Toyota
 ==============================
 ```
+ok👌，the next step is to create new product via clone in order to Keeping specific properties of the product by cloning Mass production
+## Builder + Abstract Factory + Prototype
+edit the 'Car.cpp' file, add the virtual member function named clone() and implement it using override keyword
+
+```C++
+//'Car.cpp' file
+
+#include <iostream>
+#include <memory>
+
+class Car{
+public:
+    void setHeadLightBrand(const std::string& brand){
+        m_headlight_brand = brand;
+    }
+    void setBumperBrand(const std::string& brand){
+        m_bumper_brand = brand;
+    }
+    void setTireBrand(const std::string& brand){
+        m_tire_brand = brand;
+    }
+    void setHoodBrand(const std::string& brand){
+        m_hood_brand = brand;
+    }
+    void setWindShieldBrand(const std::string& brand){
+        m_wind_shield = brand;
+    }
+    void manual() const {
+        std::cout<<"=== The Car's Brand Manual ==="<<std::endl;
+        std::cout<<"Head Light: "<<m_headlight_brand<<std::endl;
+        std::cout<<"Bumper: "<<m_bumper_brand<<std::endl;
+        std::cout<<"Tire: "<<m_tire_brand<<std::endl;
+        std::cout<<"Hood: "<<m_hood_brand<<std::endl;
+        std::cout<<"Wind Shield: "<<m_wind_shield<<std::endl;
+        std::cout<<"=============================="<<std::endl;
+    }
+private:
+    std::string m_headlight_brand,m_bumper_brand,m_tire_brand,m_hood_brand,m_wind_shield;
+};
+
+class CarBuilder{
+public:
+    virtual ~CarBuilder() = default;
+    virtual void buildHeadLight()=0;
+    virtual void buildBumper()=0;
+    virtual void buildTire()=0;
+    virtual void buildHood()=0;
+    virtual void buildWindShield()=0;
+    virtual std::unique_ptr<CarBuilder> clone() = 0;
+    void createNewCar(){
+        m_car = std::make_unique<Car>();
+    }
+    Car* getCar(){
+        return m_car.release();
+    }
+
+protected:
+    std::unique_ptr<Car> m_car;
+};
+
+class MitsubishiCarBuilder:public CarBuilder{
+public:
+    std::unique_ptr<CarBuilder> clone() override {
+        return std::make_unique<MitsubishiCarBuilder>();
+    }
+    MitsubishiCarBuilder():brand("Mitsubishi"){};
+    ~MitsubishiCarBuilder() override = default;
+    void buildHeadLight() override {
+        m_car->setHeadLightBrand(brand);
+    }
+    void buildBumper() override {
+        m_car->setBumperBrand(brand);
+    }
+    void buildTire() override {
+        m_car->setTireBrand(brand);
+    }
+    void buildHood() override {
+        m_car->setHoodBrand(brand);
+    }
+    void buildWindShield() override {
+        m_car->setWindShieldBrand(brand);
+    }
+    std::string brand;
+};
+
+class NissanCarBuilder:public CarBuilder{
+public:
+    std::unique_ptr<CarBuilder> clone() override {
+        return std::make_unique<NissanCarBuilder>();
+    }
+    NissanCarBuilder():brand("Nissan"){};
+    ~NissanCarBuilder() override = default;
+    void buildHeadLight() override {
+        m_car->setHeadLightBrand(brand);
+    }
+    void buildBumper() override {
+        m_car->setBumperBrand(brand);
+    }
+    void buildTire() override {
+        m_car->setTireBrand(brand);
+    }
+    void buildHood() override {
+        m_car->setHoodBrand(brand);
+    }
+    void buildWindShield() override {
+        m_car->setWindShieldBrand(brand);
+    }
+    std::string brand;
+};
+
+class ToyotaCarBuilder:public CarBuilder{
+public:
+    std::unique_ptr<CarBuilder> clone() override {
+        return std::make_unique<ToyotaCarBuilder>();
+    }
+    ToyotaCarBuilder():brand("Toyota"){};
+    ~ToyotaCarBuilder() override = default;
+    void buildHeadLight() override {
+        m_car->setHeadLightBrand(brand);
+    }
+    void buildBumper() override {
+        m_car->setBumperBrand(brand);
+    }
+    void buildTire() override {
+        m_car->setTireBrand(brand);
+    }
+    void buildHood() override {
+        m_car->setHoodBrand(brand);
+    }
+    void buildWindShield() override {
+        m_car->setWindShieldBrand(brand);
+    }
+    std::string brand;
+};
+
+class Worker{
+public:
+    void introduceNewCar() const {
+        carBuilder->getCar()->manual();
+    }
+    void createNewCar(CarBuilder* builder){
+        carBuilder = builder;
+        carBuilder->createNewCar();
+        carBuilder->buildHeadLight();
+        carBuilder->buildBumper();
+        carBuilder->buildTire();
+        carBuilder->buildHood();
+        carBuilder->buildWindShield();
+    }
+
+private:
+    CarBuilder* carBuilder;
+};
+```
+
+do not edit anything in 'CarFactory.cpp' file and then open the 'main.cpp' file and change into the following logic
+
+```C++
+//'main.cpp' file
+
+#include "CarFactory.cpp"
+
+int main(){
+    CarBuilderFactory carBuilderFactory;
+    auto mitsubishiBuilder = CarBuilderFactory::chooseCarBuilder(CarBuilderFactory::carBuilderType::MITSUBISHI);
+    carBuilderFactory.worker->createNewCar(mitsubishiBuilder.get());
+    carBuilderFactory.worker->introduceNewCar();
+
+    std::unique_ptr<CarBuilder> clone[5];
+    for (auto & i : clone) {
+        i = mitsubishiBuilder->clone();
+    }
+    for (auto & j : clone) {
+        carBuilderFactory.worker->createNewCar(j.release());
+        carBuilderFactory.worker->introduceNewCar();
+    }
+}
+
+//console output
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+``
