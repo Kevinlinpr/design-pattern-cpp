@@ -150,6 +150,33 @@ Builder.cpp.s:
 	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/Builder.cpp.s
 .PHONY : Builder.cpp.s
 
+Car.o: Car.cpp.o
+
+.PHONY : Car.o
+
+# target to build an object file
+Car.cpp.o:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/Car.cpp.o
+.PHONY : Car.cpp.o
+
+Car.i: Car.cpp.i
+
+.PHONY : Car.i
+
+# target to preprocess a source file
+Car.cpp.i:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/Car.cpp.i
+.PHONY : Car.cpp.i
+
+Car.s: Car.cpp.s
+
+.PHONY : Car.s
+
+# target to generate assembly for a file
+Car.cpp.s:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/Car.cpp.s
+.PHONY : Car.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -189,6 +216,9 @@ help:
 	@echo "... Builder.o"
 	@echo "... Builder.i"
 	@echo "... Builder.s"
+	@echo "... Car.o"
+	@echo "... Car.i"
+	@echo "... Car.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

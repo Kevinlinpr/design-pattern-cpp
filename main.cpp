@@ -1,12 +1,16 @@
-#include "Builder.cpp"
+#include "Car.cpp"
 
 int main(){
-    Cook cook{};
-    HawaiianPizzaBuilder hawaiianPizzaBuilder;
-    cook.createPizza(&hawaiianPizzaBuilder);
-    cook.openPizza();
+    Worker worker{};
+    MitsubishiCarBuilder mitsubishiCarBuilder;
+    worker.createNewCar(&mitsubishiCarBuilder);
+    worker.introduceNewCar();
 
-    SpicyPizzaBuilder spicyPizzaBuilder;
-    cook.createPizza(&spicyPizzaBuilder);
-    cook.openPizza();
+    NissanCarBuilder nissanCarBuilder;
+    worker.createNewCar(&nissanCarBuilder);
+    worker.introduceNewCar();
+
+    ToyotaCarBuilder toyotaCarBuilder;
+    worker.createNewCar(&toyotaCarBuilder);
+    worker.introduceNewCar();
 }
