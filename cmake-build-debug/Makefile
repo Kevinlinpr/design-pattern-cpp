@@ -177,6 +177,33 @@ Car.cpp.s:
 	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/Car.cpp.s
 .PHONY : Car.cpp.s
 
+CarFactory.o: CarFactory.cpp.o
+
+.PHONY : CarFactory.o
+
+# target to build an object file
+CarFactory.cpp.o:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/CarFactory.cpp.o
+.PHONY : CarFactory.cpp.o
+
+CarFactory.i: CarFactory.cpp.i
+
+.PHONY : CarFactory.i
+
+# target to preprocess a source file
+CarFactory.cpp.i:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/CarFactory.cpp.i
+.PHONY : CarFactory.cpp.i
+
+CarFactory.s: CarFactory.cpp.s
+
+.PHONY : CarFactory.s
+
+# target to generate assembly for a file
+CarFactory.cpp.s:
+	$(MAKE) -f CMakeFiles/CPP17.dir/build.make CMakeFiles/CPP17.dir/CarFactory.cpp.s
+.PHONY : CarFactory.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -219,6 +246,9 @@ help:
 	@echo "... Car.o"
 	@echo "... Car.i"
 	@echo "... Car.s"
+	@echo "... CarFactory.o"
+	@echo "... CarFactory.i"
+	@echo "... CarFactory.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

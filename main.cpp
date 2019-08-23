@@ -1,16 +1,13 @@
-#include "Car.cpp"
+#include "CarFactory.cpp"
 
 int main(){
-    Worker worker{};
-    MitsubishiCarBuilder mitsubishiCarBuilder;
-    worker.createNewCar(&mitsubishiCarBuilder);
-    worker.introduceNewCar();
+    CarBuilderFactory carBuilderFactory;
+    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::MITSUBISHI);
+    carBuilderFactory.introduceCarProducts();
 
-    NissanCarBuilder nissanCarBuilder;
-    worker.createNewCar(&nissanCarBuilder);
-    worker.introduceNewCar();
+    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::NISSAN);
+    carBuilderFactory.introduceCarProducts();
 
-    ToyotaCarBuilder toyotaCarBuilder;
-    worker.createNewCar(&toyotaCarBuilder);
-    worker.introduceNewCar();
+    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::TOYOTA);
+    carBuilderFactory.introduceCarProducts();
 }

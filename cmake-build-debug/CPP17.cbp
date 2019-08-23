@@ -86,6 +86,9 @@
 		<Unit filename="/Users/toushigerubon/CLionProjects/CPP17/Car.cpp">
 			<Option target="CPP17"/>
 		</Unit>
+		<Unit filename="/Users/toushigerubon/CLionProjects/CPP17/CarFactory.cpp">
+			<Option target="CPP17"/>
+		</Unit>
 		<Unit filename="/Users/toushigerubon/CLionProjects/CPP17/main.cpp">
 			<Option target="CPP17"/>
 		</Unit>

@@ -5,6 +5,10 @@ CMakeFiles/CPP17.dir/Builder.cpp.o: ../Builder.cpp
 
 CMakeFiles/CPP17.dir/Car.cpp.o: ../Car.cpp
 
+CMakeFiles/CPP17.dir/CarFactory.cpp.o: ../Car.cpp
+CMakeFiles/CPP17.dir/CarFactory.cpp.o: ../CarFactory.cpp
+
 CMakeFiles/CPP17.dir/main.cpp.o: ../Car.cpp
+CMakeFiles/CPP17.dir/main.cpp.o: ../CarFactory.cpp
 CMakeFiles/CPP17.dir/main.cpp.o: ../main.cpp
 
