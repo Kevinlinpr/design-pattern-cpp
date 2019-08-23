@@ -2,12 +2,18 @@
 
 int main(){
     CarBuilderFactory carBuilderFactory;
-    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::MITSUBISHI);
-    carBuilderFactory.introduceCarProducts();
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::MITSUBISHI).release());
+    carBuilderFactory.worker->introduceNewCar();
 
-    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::NISSAN);
-    carBuilderFactory.introduceCarProducts();
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::NISSAN).release());
+    carBuilderFactory.worker->introduceNewCar();
 
-    carBuilderFactory.createNewCar(CarBuilderFactory::carBuilderType::TOYOTA);
-    carBuilderFactory.introduceCarProducts();
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::TOYOTA).release());
+    carBuilderFactory.worker->introduceNewCar();
 }

@@ -11,30 +11,23 @@ public:
         TOYOTA
     };
     CarBuilderFactory(){
-        m_worker = new Worker;
+        worker = new Worker;
     }
     ~CarBuilderFactory(){
-        delete m_worker;
-        m_worker = nullptr;
+        delete worker;
+        worker = nullptr;
     }
-    void introduceCarProducts(){
-        m_worker->introduceNewCar();
-    }
-    void createNewCar(carBuilderType builderType){
+    std::unique_ptr<CarBuilder> chooseCarBuilder(carBuilderType builderType){
         switch (builderType){
             case MITSUBISHI:
-                m_worker->createNewCar(std::make_unique<MitsubishiCarBuilder>().release());
-                break;
+                return std::make_unique<MitsubishiCarBuilder>();
             case NISSAN:
-                m_worker->createNewCar(std::make_unique<NissanCarBuilder>().release());
-                break;
+                return std::make_unique<NissanCarBuilder>();
             case TOYOTA:
-                m_worker->createNewCar(std::make_unique<ToyotaCarBuilder>().release());
-                break;
+                return std::make_unique<ToyotaCarBuilder>();
             default:
-                break;
+                return nullptr;
         }
     }
-private:
-    Worker* m_worker;
+    Worker* worker;
 };
