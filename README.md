@@ -2,6 +2,7 @@
 ## Builder
 ```C++
 //example about the car
+//This file named 'Car.cpp'
 #include <iostream>
 #include <memory>
 
@@ -281,4 +282,83 @@ int main(){
 //console output
 //The Pizza have Hawaiian dough dough, Hawaiian sauce sauce, Hawaiian topping topping.
 //The Pizza have Spicy dough dough, Spicy sauce sauce, Spicy topping topping.
+```
+now I want to decide which car Builder will be created at run time
+so,I use Abstract Factory to make the decision at the run time!
+## Builder + Abstract Factory
+```C++
+//This file named 'CarFactory.cpp'
+
+#include "Car.cpp"
+//now I want to decide which car Builder will be created at run time
+
+class CarBuilderFactory{
+public:
+    enum carBuilderType{
+        MITSUBISHI,
+        NISSAN,
+        TOYOTA
+    };
+    CarBuilderFactory(){
+        worker = new Worker;
+    }
+    ~CarBuilderFactory(){
+        delete worker;
+        worker = nullptr;
+    }
+    std::unique_ptr<CarBuilder> chooseCarBuilder(carBuilderType builderType){
+        switch (builderType){
+            case MITSUBISHI:
+                return std::make_unique<MitsubishiCarBuilder>();
+            case NISSAN:
+                return std::make_unique<NissanCarBuilder>();
+            case TOYOTA:
+                return std::make_unique<ToyotaCarBuilder>();
+            default:
+                return nullptr;
+        }
+    }
+    Worker* worker;
+};
+
+int main(){
+    CarBuilderFactory carBuilderFactory;
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::MITSUBISHI).release());
+    carBuilderFactory.worker->introduceNewCar();
+
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::NISSAN).release());
+    carBuilderFactory.worker->introduceNewCar();
+
+    carBuilderFactory.worker
+    ->createNewCar(carBuilderFactory.chooseCarBuilder(
+            CarBuilderFactory::carBuilderType::TOYOTA).release());
+    carBuilderFactory.worker->introduceNewCar();
+}
+
+//console output
+=== The Car's Brand Manual ===
+Head Light: Mitsubishi
+Bumper: Mitsubishi
+Tire: Mitsubishi
+Hood: Mitsubishi
+Wind Shield: Mitsubishi
+==============================
+=== The Car's Brand Manual ===
+Head Light: Nissan
+Bumper: Nissan
+Tire: Nissan
+Hood: Nissan
+Wind Shield: Nissan
+==============================
+=== The Car's Brand Manual ===
+Head Light: Toyota
+Bumper: Toyota
+Tire: Toyota
+Hood: Toyota
+Wind Shield: Toyota
+==============================
 ```
